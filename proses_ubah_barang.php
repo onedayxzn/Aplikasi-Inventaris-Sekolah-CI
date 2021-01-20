@@ -1,0 +1,20 @@
+<?php
+//Panggil Koneksi
+require_once "db/connect.php";
+
+//Ambil semua data yang dikirim user melalui form
+$id_barang = $_POST["id_barang"];
+$nama_barang = $_POST["nama_barang"];
+$spesifikasi = $_POST["spesifikasi"];
+$lokasi = $_POST["lokasi"];
+$kondisi = $_POST["kondisi"];
+$jml_barang = $_POST["jml_barang"];
+$sumber_dana = $_POST["sumber_dana"];
+
+//Masukan semua data ke database
+$update = mysqli_query($koneksi, "UPDATE barang SET id_barang='$id_barang', nama_barang='$nama_barang', spesifikasi='$spesifikasi', lokasi='$lokasi',  kondisi='$kondisi', jml_barang='$jml_barang',  sumber_dana='$sumber_dana' WHERE id_barang='$id_barang'");
+if ($update){
+header("location: admin.php?halaman=barang");
+} else {
+die("Gagal mengubah data! ".mysqli_error($koneksi));
+}
